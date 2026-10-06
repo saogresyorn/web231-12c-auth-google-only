@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export type Product = {
   id: string
   name: string
@@ -32,12 +34,29 @@ const initialProducts: Product[] = [
 export const CATEGORIES = ["Electronics", "Accessories"] as const
 export const SORT_FIELDS = ["name", "price"] as const
 
-export const ProductDraftSchema = {}
-export const SearchQuerySchema = {}
-export const defaultQuery = {}
+export const ProductDraftSchema = z.object({
+  name: z.string(),
+  price: z.number(),
+  description: z.string(),
+  category: z.string().optional(),
+  title: z.string().optional(),
+  stock: z.number().optional(),
+})
 
-export type ProductDraft = any
-export type SearchQuery = any
+export const SearchQuerySchema = z.object({
+  search: z.string().optional(),
+  category: z.string().optional(),
+  sortBy: z.string().optional(),
+})
+
+export const defaultQuery = {
+  search: "",
+  category: "",
+  sortBy: "name",
+}
+
+export type ProductDraft = z.infer<typeof ProductDraftSchema>
+export type SearchQuery = z.infer<typeof SearchQuerySchema>
 
 declare global {
   // eslint-disable-next-line no-var
