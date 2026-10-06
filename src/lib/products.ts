@@ -3,6 +3,9 @@ export type Product = {
   name: string
   price: number
   description: string
+  category?: string
+  title?: string
+  stock?: number
 }
 
 const initialProducts: Product[] = [
@@ -25,6 +28,16 @@ const initialProducts: Product[] = [
     description: "USB-C Hub with HDMI and Card Reader",
   },
 ]
+
+export const CATEGORIES = ["Electronics", "Accessories"] as const
+export const SORT_FIELDS = ["name", "price"] as const
+
+export const ProductDraftSchema = {}
+export const SearchQuerySchema = {}
+export const defaultQuery = {}
+
+export type ProductDraft = any
+export type SearchQuery = any
 
 declare global {
   // eslint-disable-next-line no-var
