@@ -10,7 +10,7 @@ export type Product = {
   stock?: number;
 }
 
-export type ProductList = Product[];
+export type ProductList = Product[] & { products?: Product[] };
 
 const initialProducts: Product[] = [
   {
@@ -87,7 +87,11 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 export function getProducts() {
-  return products
+  return products as ProductList
+}
+
+export function fetchProducts() {
+  return products as ProductList
 }
 
 export function getProduct(id: string | number) {
